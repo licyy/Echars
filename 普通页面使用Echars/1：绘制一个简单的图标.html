@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 导入Echars -->
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+</head>
+
+<body>
+    <!-- 给Echars绘图一个容器 -->
+    <div id="main" style="width: 600px;height: 400px"></div>
+    <script>
+        // 准备好dom
+        var myChart = echarts.init(document.getElementById("main"))
+        //指定图表的配置项和数据
+        var option = {
+            title: {        //标题
+                text: "Echars入门"
+            },
+            tooltip: {},    //提示框
+            legend: {
+                data: ['销量']  //图例  
+            },
+            xAxis: {    //x轴显示数据
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            },
+            yAxis: {    //y轴显示数据
+
+            },
+            series: [{  //系列列表  
+                name: "销量",   
+                type: "bar",    //指定为柱状图系列
+                data: [5, 30, 10, 20, 10, 36]   //具体数据
+            }]
+        }
+        myChart.setOption(option)
+    </script>
+</body>
+
+</html>
