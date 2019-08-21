@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+
+</head>
+
+<body>
+    <div id="main" style="width: 600px;height: 400px">
+
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById("main"))
+        var option = {
+            backgroundColor: '#2c343c',  //设置全局背景颜色
+            visualMap: {
+                show: true,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            textStyle: {     //全局设置文字颜色--可以通过label>textStyle单独给系列设置
+                color: 'rgba(255, 255, 255, 0.3)',
+                fontSize: "16"   //大小--不能带单位
+            },
+            legend: {   //设置图例
+                data: ["视屏广告", "联盟广告", "邮件广告", "直接访问", "搜索引擎"],
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+
+            series: [{  //系列
+                name: "访问来源",
+                type: "pie",        //饼图
+                radius: "55%",
+                roseType: "angle",   //转换成南丁格尔图
+                data: [
+                    {
+                        value: 235,
+                        name: "视屏广告",
+                        // itemStyle: {    //可以在data数据中直接定义每个部分的样式--也可以通过itemStyle全局设置样式
+                        //     color: 'rgba(192, 57, 43,1.0)'
+                        // }
+                    },
+                    {value: 274, name: "联盟广告"},
+                    {value: 310, name: "邮件广告"},
+                    {value: 335, name: "直接访问"},
+                    {value: 500, name: "搜索引擎"},
+                ],
+                itemStyle: {//设置一些公共样式--也可以直接在data中单独给每一项设置样式
+                    color: 'rgba(192, 57, 43,1.0)',
+                    shadowBlur: 200,    //阴影
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowColor: "rgba(0,0,0,0.5)",
+                },
+                label: { //系列的文本设置
+                    textStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)',
+                        fontWeight: 'normal',
+                        
+                    },
+                },
+                labelLine: {   //视觉引导线
+                    lineStyle: {
+                        color: 'blue',
+                    },
+                },
+                emphasis: {     //鼠标hover样式
+                    itemStyle: {
+                        shadowBlur: 200,
+                        shadowColor: "rgba(0,0,220,0.5)",
+                    },
+                    label: {
+                        textStyle: {
+                            color: 'rgba(192, 57, 43,1.0)',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        lineStyle: {
+                            color: 'rgba(192, 57, 43,1.0)',
+                            width: 2
+                        }
+                    }
+                },
+            }]
+
+
+        }
+        myChart.setOption(option)
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #main {
+            width: 100%;
+            min-height: 700px;
+            background-color: aquamarine;
+        }
+    </style>
+
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.js"></script>
+
+</head>
+
+<body>
+    <div id="main">
+
+    </div>
+    <script>
+        var node = [
+            {name: "石原里美", category: "全部", value: 0, label: "石原里美"},
+            {name: "同案", category: "全部", value: 1, label: "同案"},
+            {name: "同住", category: "全部", value: 1, label: "同住"},
+            {name: "同户", category: "全部", value: 1, label: "同户"},
+            {name: "入所", category: "全部", value: 1, label: "入所"},
+            {name: "同单位", category: "全部", value: 1, label: "同单位"},
+            {name: "同网吧", category: "全部", value: 1, label: "同网吧"},
+            {name: "汽车", category: "全部", value: 1, label: "汽车"},
+            {name: "火车", category: "全部", value: 1, label: "火车"},
+            {name: "航班", category: "全部", value: 1, label: "航班"},
+            // {name: "同案1", category: "同案", value: 1, label: "同案1"},
+            // {name: "同案2", category: "同案", value: 1, label: "同案2"},
+            // {name: "同住1", category: "同住", value: 1, label: "同住1"},
+            // {name: "同住2", category: "同住", value: 1, label: "同住2"},
+            // {name: "入所1", category: "入所", value: 1, label: "入所1"},
+            // {name: "入所2", category: "入所", value: 1, label: "入所2"},
+            // {name: "同单位1", category: "同单位", value: 1, label: "同单位1"},
+            // {name: "同单位2", category: "同单位", value: 1, label: "同单位2"},
+            // {name: "同网吧1", category: "同网吧", value: 1, label: "同网吧1"},
+            // {name: "同网吧2", category: "同网吧", value: 1, label: "同网吧2"},
+            // {name: "汽车1", category: "汽车", value: 1, label: "汽车1"},
+            // {name: "汽车2", category: "汽车", value: 1, label: "汽车2"},
+            // {name: "火车1", category: "火车", value: 1, label: "火车1"},
+            // {name: "火车2", category: "火车", value: 1, label: "火车2"},
+            // {name: "航班1", category: "航班", value: 1, label: "航班1"},
+            // {name: "航班2", category: "航班", value: 1, label: "航班2"},
+            // {name: "同户1", category: "同户", value: 1, label: "同户1"},
+            // {name: "同户2", category: "同户", value: 1, label: "同户2"},
+            // {name: "汽车3", category: "汽车", value: 1, label: "汽车3"},
+            // {name: "汽车4", category: "汽车", value: 1, label: "汽车4"},
+            // {name: "汽车人1", category: "汽车", value: 1, label: "汽车人1"},
+            // {name: "汽车人2", category: "汽车", value: 1, label: "汽车人2"},
+            // {name: "汽车人3", category: "汽车", value: 1, label: "汽车人3"},
+            // {name: "汽车人4", category: "汽车", value: 1, label: "汽车人4"},
+        ]
+        var edge = [
+            {source: "石原里美", target: "同案", value: 5},
+            {source: "石原里美", target: "同住", value: 5},
+            {source: "石原里美", target: "同户", value: 5},
+            {source: "石原里美", target: "入所", value: 5},
+            {source: "石原里美", target: "同单位", value: 5},
+            {source: "石原里美", target: "同网吧", value: 5},
+            {source: "石原里美", target: "汽车", value: 5},
+            {source: "石原里美", target: "火车", value: 5},
+            {source: "石原里美", target: "航班", value: 5},
+            // {source: "同案", target: "同案1", value: 5},
+            // {source: "同案", target: "同案2", value: 5},
+            // {source: "同住", target: "同住1", value: 5},
+            // {source: "同住", target: "同住2", value: 5},
+            // {source: "入所", target: "入所1", value: 5},
+            // {source: "入所", target: "入所2", value: 5},
+            // {source: "火车", target: "火车1", value: 5},
+            // {source: "火车", target: "火车2", value: 5},
+            // {source: "航班", target: "航班1", value: 5},
+            // {source: "航班", target: "航班2", value: 5},
+            // {source: "同户", target: "同户1", value: 5},
+            // {source: "同户", target: "同户2", value: 5},
+            // {source: "同单位", target: "同单位1", value: 5},
+            // {source: "同单位", target: "同单位2", value: 5},
+            // {source: "同网吧", target: "同网吧1", value: 5},
+            // {source: "同网吧", target: "同网吧2", value: 5},
+            // {source: "汽车", target: "汽车1", value: 5},
+            // {source: "汽车", target: "汽车2", value: 5},
+            // {source: "汽车", target: "汽车3", value: 5},
+            // {source: "汽车", target: "汽车4", value: 5},
+            // {source: "汽车3", target: "汽车人1", value: 5},
+            // {source: "汽车3", target: "汽车人2", value: 5},
+            // {source: "汽车4", target: "汽车人3", value: 5},
+            // {source: "汽车4", target: "汽车人4", value: 5}
+        ]
+
+        var myChart = echarts.init(document.getElementById("main"))
+        option = {
+            title: {
+                text: "石原里美关系图",
+                top: "top",
+                left: "center"
+            },
+            // legend: {
+            //     show: true,
+            //     orient: 'vertical',
+            //     x: "right",
+            //     // data: ["全部", "同案", "同住", "入所", "同户", "同单位", "同网吧", "汽车", "火车", "航班"]
+            // },
+
+            series: {
+                type: "graph",
+                layout: 'force',
+                force: {
+                    repulsion: 1000,
+                    edgeLength: 100
+                },
+
+                roam: true,
+                // categories: [
+                //     {name: "全部", }
+                //     {name: "同案", },
+                //     {name: "同住", },
+                //     {name: "入所", },
+                //     {name: "同户", },
+                //     {name: "同单位", },
+                //     {name: "同网吧", },
+                //     {name: "汽车", },
+                //     {name: "火车", },
+                //     {name: "航班", }
+                // ],
+                data: node,
+                links: edge,
+                label: {
+                    textStyle: {
+                        color: 'red',
+                        fontWeight: 'normal',
+                        fontSize: 16,
+                    },
+                },
+                lineStyle: {
+                    color: "#7f8c8d",
+                    width: 2,
+                },
+                // symbol: 'emptyCircle',
+                // symbolSize: 80,
+                emphasis: {
+                    label: {
+                        textStyle: {
+                            color: 'blue',
+                        },
+                    },
+                }
+            }
+
+        }
+
+
+        myChart.setOption(option)
+    </script>
+</body>
+
+</html>

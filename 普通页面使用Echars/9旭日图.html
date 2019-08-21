@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.js"></script>
+</head>
+
+<body>
+    <div id="main" style="width: 600px;height: 400px">
+
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById("main"))
+        myChart.setOption({
+            legend: {
+                // data: ['a', 'b', 'c']
+            },
+            series: {
+                type: "sunburst",
+                data: [{
+                    name: 'a',
+                    value: 10,
+                    children: [{
+                        value: 3,
+                        name: "a1"
+                    }, {
+                        value: 7,
+                        name: "a2"
+                    }]
+                }, {
+                    name: 'b',
+                    value: 8,
+                    children: [{
+                        value: 4,
+                        name: "b1"
+                    }, {
+                        value: 6,
+                        name: "b2"
+                    }]
+                }, {
+                    name: 'c',
+                    value: 12,
+                    children: [{
+                        value: 2,
+                        name: "c1"
+                    }, {
+                        value: 6,
+                        name: "c2"
+                    }, {
+                        value: 4,
+                        name: "c3"
+                    }]
+                }],
+                levels: [{          //也可以单独设置itemStyle
+                    //留给数据下钻点
+                }, {
+                    // 最靠内测的第一层
+                    itemStyle: {
+                        color: ['#dd6b66', '#759aa0', '#e69d87', '#8dc1a9', '#ea7e53', '#eedd78', '#73a373', '#73b9bc', '#7289ab', '#91ca8c', '#f49f42'],
+                    },
+                    label: {
+                        color: '#fff'
+                    }
+                }]
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

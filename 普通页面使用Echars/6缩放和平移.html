@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+
+</head>
+
+<body>
+    <div id="main" style="width: 600px;height: 400px">
+
+
+
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById("main", "dark"))
+        option = {
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
+                type: 'value'
+            },
+            dataZoom: [ //设置缩放和平移
+                {
+                    type: 'slider',     //slider添加滚动条型
+                    xAxisIndex: 0,      //设置在哪个x轴上
+                    start: 10,          //起始位置
+                    end: 60             //结束为止
+                },
+                {
+                    type: 'inside',     //inside添加内置型--鼠标滚轮可以控制
+                    xAxisIndex: 0,
+                    start: 10,
+                    end: 60
+                },
+                {
+                    type: 'slider',
+                    yAxisIndex: 0,
+                    start: 30,
+                    end: 80
+                },
+                {
+                    type: 'inside',
+                    yAxisIndex: 0,
+                    start: 30,
+                    end: 80
+                }
+            ],
+            series: [
+                {
+                    type: 'scatter', // 这是个『散点图』
+                    itemStyle: {
+                        opacity: 0.8
+                    },
+                    symbolSize: function (val) {
+                        return val[2] * 40;
+                    },
+                    data: [["14.616", "7.241", "0.896"], ["3.958", "5.701", "0.955"], ["2.768", "8.971", "0.669"], ["9.051", "9.710", "0.171"], ["14.046", "4.182", "0.536"], ["12.295", "1.429", "0.962"], ["4.417", "8.167", "0.113"], ["0.492", "4.771", "0.785"], ["7.632", "2.605", "0.645"], ["14.242", "5.042", "0.368"]]
+                }
+            ]
+        }
+        myChart.setOption(option)
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+
+</head>
+
+<body>
+    <div id="main" style="width: 600px;height: 400px">
+
+
+
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById("main", "dark"))
+        var symbolSize = 20
+        var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
+
+        myChart.setOption({
+            tooltip: {
+                triggerOn: "none",//不适用默认的显示隐藏触发规则
+                formatter: function (params) {
+                    return 'X: ' + params.data[0].toFixed(2) + '<br>Y: ' + params.data[1].toFixed(2);
+                }
+            },
+            dataZoom: [  //设置缩放和平移
+                {
+                    type: 'inside',     //inside添加内置型--鼠标滚轮可以控制
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    yAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                }
+            ],
+            xAxis: {
+                min: -100,
+                max: 80,
+                type: 'value',   //连续数值轴
+                axisLines: {onZero: false}    //axisLines--设置轴线相关  onZero是否从另一个轴的0开始
+            },
+            yAxis: {
+                min: -30,
+                max: 60,
+                type: 'value',
+                axisLines: {onZero: false}
+            },
+            series: [{
+                id: 'a',
+                type: "line",
+                smooth: true,    //是否平滑曲线显示
+                symbol: 'emptyCircle',//标记节点类型,默认emptyCircle空心圆
+                symbolSize: symbolSize,  //标记大小
+                data: data
+            }]
+        })
+
+        myChart.setOption({
+            //声明一个graphic 组件,里面根据数据生成诺干个circle
+            //echarts.util.map映射data中的每一项
+            graphic: echarts.util.map(data, function (item, dataIndex) {
+                return {
+                    type: "circle",  //graphic element 的类型是圆点
+                    shape: {
+                        r: symbolSize / 2  //圆半径
+                    },
+                    // position:[x,y] 表示将圆移动到x,y的位置
+                    // myChart.convertToPixel('grid',dataItem)方法获得数据在grid坐标系中的坐标
+                    position: myChart.convertToPixel('grid', item),
+                    invisible: true, //让圆不可见
+                    draggable: true, //让圆可以拖拽
+                    z: 100,  //圆点在最上放,盖住了折线图上的点
+                    // 调用onPointDragging方法,传入的值永远是此时传入的dataIndex
+                    ondrag: echarts.util.curry(onPointDragging, dataIndex),
+                    onmousemove: echarts.util.curry(showTooltip, dataIndex),
+                    onmouseout: echarts.util.curry(hideTooltip, dataIndex),
+                }
+            })
+        }
+        )
+
+        function onPointDragging(dataIndex) {
+            //  myChart.convertFromPixel方法根据当前坐标返回成数据
+            data[dataIndex] = myChart.convertFromPixel('grid', this.position)
+            //更新数据
+            myChart.setOption({
+                series: [{
+                    id: 'a',
+                    data: data
+                }]
+            })
+        }
+        function showTooltip(dataIndex) {
+            myChart.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: dataIndex
+            });
+        }
+
+        function hideTooltip(dataIndex) {
+            myChart.dispatchAction({
+                type: 'hideTip'
+            });
+        }
+        //resize屏幕大小发生改变时触发
+        window.addEventListener('resize', function () {
+            // 对每个拖拽圆点重新计算位置，并用 setOption 更新。
+            myChart.setOption({
+                graphic: echarts.util.map(data, function (item, dataIndex) {
+                    return {
+                        position: myChart.convertToPixel('grid', item)
+                    };
+                })
+            });
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
